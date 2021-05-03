@@ -2,6 +2,10 @@
 #include <iostream>
 using namespace std;
 
+//Import a C library to generate a random slot
+#include <cstdlib>
+#include <ctime>
+
 
 // Create the board
 char board[3][3] = {{'1','2', '3'},{'4','5','6'}, {'7','8','9'}}; 
@@ -70,8 +74,13 @@ char winner() {
 // A function that swap the player and the marker in the game
 void swap_player_and_marker() {
 	
-	if (current_marker == 'X') current_marker = 'O';
-	else current_marker = 'X';
+	if (current_marker == 'X') {
+		current_marker = 'O';
+		cout << "Player 2 marker is : " << current_marker << "\n";
+	}
+	else {
+	current_marker = 'X';
+	cout << "Player 1 marker is : " << current_marker << "\n";}
 	
 
 	if (current_player == 1) {
@@ -86,22 +95,17 @@ void swap_player_and_marker() {
 // creating the interface for the game
 void game () {
 	cout << '\n';
+	cout << "Hello players, welcome to TicTacToe\n"; 
 	cout << "Player one, choose your marker : "; 
 	char marker_p1;
 	cin >> marker_p1;
 	current_player = 1;
 	current_marker = marker_p1;
 
-	/*cout << "Player two, choose your marker : "; 
-	char marker_p2;
-	cin >> marker_p2;
-	current_player = 2;
-*/
 	drawBoard();
 
 	int player_won;
-
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 9 ; i++) {
 		cout << "It's player " << current_player << "'s turn. Enter your slot : ";
 		int slot;
 		cin >> slot;
@@ -137,5 +141,4 @@ void game () {
 
 int main () {
 	game();
-
 }
