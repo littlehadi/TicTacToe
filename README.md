@@ -1,2 +1,2 @@
 # TicTacToe
- This project will be abou the TicTacToe Game
+This project will be about the Tic-Tac-Toe game using 2d arrays
