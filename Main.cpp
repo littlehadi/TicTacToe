@@ -21,9 +21,10 @@ void drawBoard()
 
 }
 
-void placeMarker(int slot) {
+bool placeMarker(int slot) {
 	int row = slot / 3;
 	int col;
+
 	// If slot is a multiple of 3
 	if (slot % 3 == 0) {
 		row =row -1;
@@ -32,8 +33,12 @@ void placeMarker(int slot) {
 	else {
 		col = (slot % 3) -1;
 	}
-
-	board[row][col] = current_marker;
+	if (board[row][col] != 'X' && board[row][col] != 'O' ) {
+		board[row][col] = current_marker;
+		return true;
+	}
+	else return false;
+	//board[row][col] = current_marker;
 
 }
 
@@ -94,14 +99,38 @@ void game () {
 */
 	drawBoard();
 
+	int player_won;
+
 	for (int i = 0; i < 9; i++) {
 		cout << "It's player " << current_player << "'s turn. Enter your slot : ";
 		int slot;
 		cin >> slot;
 
-		placeMarker(slot);
-		swap_player_and_marker();
+		if (slot < 1 || slot > 9){
+			cout << "That slot is invalid! try another slot!";
+			 i--; 
+			 continue;
+		}
+		if (!placeMarker(slot)) {
+			cout << "That slot is occupied! try another slot!";
+			 i--; 
+			 continue;
+		}
+
 		drawBoard();
+		player_won = winner();
+
+		if (player_won == 1) {
+			cout << "Player one won! Congratulation!"; break;
+		}
+		if (player_won == 2) {
+			cout << "Player two won! Congratulation!"; break;
+		}
+		swap_player_and_marker();
+	}
+	//If no one wins, then it's a tie
+	if (player_won == 0) {
+		cout << "That is a tie game!";
 	}
 }
 
