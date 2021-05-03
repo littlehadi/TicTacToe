@@ -65,14 +65,11 @@ char winner() {
 // A function that swap the player and the marker in the game
 void swap_player_and_marker() {
 	
-	if (current_marker == 'x'){
-		current_marker = 'O';
-	}
-	else {
-		current_marker = 'X';
-	}
+	if (current_marker == 'X') current_marker = 'O';
+	else current_marker = 'X';
+	
 
-	if (current_player ==1) {
+	if (current_player == 1) {
 		current_player = 2;
 	}
 	else {
@@ -98,11 +95,12 @@ void game () {
 	drawBoard();
 
 	for (int i = 0; i < 9; i++) {
-		cout << "It's player " << current_player << "'s turn. Enter your slot";
+		cout << "It's player " << current_player << "'s turn. Enter your slot : ";
 		int slot;
 		cin >> slot;
 
 		placeMarker(slot);
+		swap_player_and_marker();
 		drawBoard();
 	}
 }
